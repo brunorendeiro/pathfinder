@@ -1,6 +1,8 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { algorithms, createGrid, resetSearchState, type AlgorithmKey, type Grid, type GridNode } from './data/algorithms'
 import { algorithmInfo } from './data/info'
+import { getStoredConsent, loadAnalytics } from './analytics'
+import CookieConsent from './CookieConsent'
 
 const ROWS = 18
 const COLS = 42
@@ -33,6 +35,10 @@ export default function App() {
   const [status, setStatus] = useState<'idle' | 'visualizing' | 'found' | 'not-found'>('idle')
 
   const dragMode = useRef<DragMode>(null)
+
+  useEffect(() => {
+    if (getStoredConsent() === 'granted') loadAnalytics()
+  }, [])
   const wallPaintValue = useRef(false)
   const mouseDown = useRef(false)
 
@@ -206,6 +212,11 @@ export default function App() {
       </section>
     </main>
 
-    <footer>Pure client-side: Canvas-free grid rendering, plain DOM refs for animation, no backend.</footer>
+    <footer>
+      <span>Pure client-side: Canvas-free grid rendering, plain DOM refs for animation, no backend.</span>
+      <a href="https://vibe-portfolio-one.vercel.app/" target="_blank" rel="noreferrer">Created by Bruno Rendeiro</a>
+      <span className="powered-badge">⚡ Powered by AI</span>
+    </footer>
+    <CookieConsent />
   </div>
 }
