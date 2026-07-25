@@ -272,9 +272,9 @@ header { display: flex; align-items: center; padding-bottom: 20px; border-bottom
 }
 .code-block::before {
   content: 'FIELD NOTES';
-  position: absolute;
-  top: -17px;
-  left: 16px;
+  display: block;
+  width: max-content;
+  margin: 0 0 14px;
   padding: 5px 14px;
   line-height: 1;
   white-space: nowrap;
