@@ -210,6 +210,7 @@ export default function App() {
           <div><span>Time</span><strong>{info.time}</strong></div>
           <div><span>Space</span><strong>{info.space}</strong></div>
         </div>
+        <pre className="code-block"><code>{info.code}</code></pre>
       </section>
     </main>
 

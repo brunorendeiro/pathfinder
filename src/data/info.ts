@@ -6,6 +6,7 @@ export type AlgorithmInfo = {
   guarantees: string
   time: string
   space: string
+  code: string
 }
 
 export const algorithmInfo: Record<AlgorithmKey, AlgorithmInfo> = {
@@ -15,6 +16,21 @@ export const algorithmInfo: Record<AlgorithmKey, AlgorithmInfo> = {
     guarantees: 'Shortest path (unweighted)',
     time: 'O(V + E)',
     space: 'O(V)',
+    code: `const queue = [start]
+start.visited = true
+
+while (queue.length > 0) {
+  const node = queue.shift()
+  if (node === end) break
+
+  for (const neighbor of neighborsOf(node)) {
+    if (!neighbor.visited) {
+      neighbor.visited = true
+      neighbor.previous = node
+      queue.push(neighbor)
+    }
+  }
+}`,
   },
   dijkstra: {
     name: "Dijkstra's Algorithm",
@@ -22,6 +38,23 @@ export const algorithmInfo: Record<AlgorithmKey, AlgorithmInfo> = {
     guarantees: 'Shortest path (weighted, non-negative)',
     time: 'O(V²) — O((V+E) log V) with a binary heap',
     space: 'O(V)',
+    code: `start.distance = 0
+const unvisited = allNodes()
+
+while (unvisited.length > 0) {
+  const node = closestBy(unvisited, 'distance') // linear scan
+  if (node.distance === Infinity) break
+  remove(unvisited, node)
+  if (node === end) break
+
+  for (const neighbor of neighborsOf(node)) {
+    const distance = node.distance + 1
+    if (distance < neighbor.distance) {
+      neighbor.distance = distance
+      neighbor.previous = node
+    }
+  }
+}`,
   },
   astar: {
     name: 'A* Search',
@@ -29,5 +62,24 @@ export const algorithmInfo: Record<AlgorithmKey, AlgorithmInfo> = {
     guarantees: 'Shortest path (with an admissible heuristic)',
     time: 'O(V²) worst case, far fewer nodes visited in practice',
     space: 'O(V)',
+    code: `start.distance = 0
+const fScore = new Map([[start, heuristic(start, end)]])
+const open = [start]
+
+while (open.length > 0) {
+  const node = lowestBy(open, fScore) // linear scan
+  remove(open, node)
+  if (node === end) break
+
+  for (const neighbor of neighborsOf(node)) {
+    const distance = node.distance + 1
+    if (distance < neighbor.distance) {
+      neighbor.distance = distance
+      neighbor.previous = node
+      fScore.set(neighbor, distance + heuristic(neighbor, end))
+      open.push(neighbor)
+    }
+  }
+}`,
   },
 }
