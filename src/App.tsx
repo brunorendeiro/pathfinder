@@ -11,6 +11,7 @@ const END = { row: 9, col: 35 }
 
 type Speed = 'fast' | 'normal' | 'slow'
 const speedDelay: Record<Speed, number> = { fast: 4, normal: 12, slow: 35 }
+const speedLabel: Record<Speed, string> = { slow: 'Leisurely', normal: 'Steady', fast: 'Brisk' }
 
 type DragMode = 'wall' | 'start' | 'end' | null
 
@@ -150,11 +151,11 @@ export default function App() {
 
   return <div className="app-shell" onMouseUp={handleMouseUp}>
     <header>
-      <div className="brand"><span className="brand-mark">PF</span><div><strong>Pathfinder</strong><small>Algorithm visualizer</small></div></div>
+      <div className="brand"><span className="brand-mark" aria-hidden="true" /><div><strong>Pathfinder</strong><small>An adventurer's route-finder</small></div></div>
     </header>
 
     <main>
-      <p className="intro">Drag the green and red markers to move start and target. Click and drag on empty cells to draw walls. Pick an algorithm and watch it search.</p>
+      <p className="intro">Drag the compass to move where you start, and the X to move where the treasure lies. Click and drag empty ground to raise mountains. Pick a method of scouting and watch it read the map.</p>
 
       <section className="controls">
         <div className="control-group">
@@ -169,22 +170,22 @@ export default function App() {
           <span>Speed</span>
           <div className="segmented">
             {(['slow', 'normal', 'fast'] as Speed[]).map(key => (
-              <button key={key} className={speed === key ? 'active' : ''} disabled={isVisualizing} onClick={() => setSpeed(key)}>{key}</button>
+              <button key={key} className={speed === key ? 'active' : ''} disabled={isVisualizing} onClick={() => setSpeed(key)}>{speedLabel[key]}</button>
             ))}
           </div>
         </div>
         <div className="control-actions">
-          <button className="primary" disabled={isVisualizing} onClick={visualize}>{isVisualizing ? 'Searching…' : 'Visualize'}</button>
-          <button className="ghost" disabled={isVisualizing} onClick={clearPath}>Clear path</button>
-          <button className="ghost" disabled={isVisualizing} onClick={clearBoard}>Clear board</button>
+          <button className="primary" disabled={isVisualizing} onClick={visualize}>{isVisualizing ? 'Scouting…' : 'Chart the course'}</button>
+          <button className="ghost" disabled={isVisualizing} onClick={clearPath}>Clear route</button>
+          <button className="ghost" disabled={isVisualizing} onClick={clearBoard}>Reset map</button>
         </div>
       </section>
 
       <p className={`status status-${status}`} role="status">
-        {status === 'idle' && 'Ready when you are.'}
-        {status === 'visualizing' && 'Searching…'}
-        {status === 'found' && 'Shortest path found!'}
-        {status === 'not-found' && 'No path exists — the target is boxed in.'}
+        {status === 'idle' && 'The map is laid out — plot your route.'}
+        {status === 'visualizing' && 'Scouting the terrain…'}
+        {status === 'found' && 'X marks the spot — shortest route found!'}
+        {status === 'not-found' && 'No way through — the mountains have it boxed in.'}
       </p>
 
       <div className="board-scroll">
@@ -213,7 +214,7 @@ export default function App() {
     </main>
 
     <footer>
-      <span>Pure client-side: Canvas-free grid rendering, plain DOM refs for animation, no backend.</span>
+      <span>No servers charted here — just paper, ink and a steady hand. Pure client-side rendering, no backend.</span>
       <a href="https://vibe-portfolio-one.vercel.app/" target="_blank" rel="noreferrer">Created by Bruno Rendeiro</a>
       <span className="powered-badge">⚡ Powered by AI</span>
     </footer>
