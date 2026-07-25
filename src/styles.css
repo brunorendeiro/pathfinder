@@ -254,7 +254,7 @@ header { display: flex; align-items: center; padding-bottom: 20px; border-bottom
 
 .code-block {
   position: relative;
-  margin: 22px 2px 4px 14px;
+  margin: 28px 2px 4px 14px;
   padding: 18px 20px;
   border: 1px solid var(--line);
   border-radius: 2px;
@@ -273,16 +273,19 @@ header { display: flex; align-items: center; padding-bottom: 20px; border-bottom
 .code-block::before {
   content: 'FIELD NOTES';
   position: absolute;
-  top: -11px;
+  top: -17px;
   left: 16px;
-  padding: 3px 9px 2px;
+  padding: 5px 14px;
   line-height: 1;
+  white-space: nowrap;
   background: var(--forest);
   color: var(--parchment-light);
-  font: 700 9px 'Vollkorn', serif;
-  letter-spacing: .14em;
-  border-radius: 2px;
-  box-shadow: 0 2px 3px var(--shadow);
+  font-family: 'Vollkorn', serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px var(--shadow);
 }
 .code-block::after {
   content: '';
