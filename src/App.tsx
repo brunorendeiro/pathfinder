@@ -151,7 +151,7 @@ export default function App() {
 
   return <div className="app-shell" onMouseUp={handleMouseUp}>
     <header>
-      <div className="brand"><span className="brand-mark" aria-hidden="true" /><div><strong>Pathfinder</strong><small>An adventurer's route-finder</small></div></div>
+      <h1 className="brand"><span className="brand-mark" aria-hidden="true" /><div><strong>Pathfinder</strong><small>An adventurer's route-finder</small></div></h1>
     </header>
 
     <main>

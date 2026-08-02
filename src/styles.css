@@ -46,7 +46,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 /* ---------- Header ---------- */
 
 header { display: flex; align-items: center; padding-bottom: 20px; border-bottom: 3px double var(--ink-soft); }
-.brand { display: flex; align-items: center; gap: 16px; }
+.brand { display: flex; align-items: center; gap: 16px; margin: 0; }
 
 .brand-mark {
   position: relative;
@@ -310,7 +310,7 @@ footer {
   font: italic 400 13px 'Vollkorn', serif;
   text-align: center;
 }
-footer a { color: var(--ink-soft); text-decoration: underline; }
+footer a { color: var(--ink-soft); font-style: normal; font-weight: 700; text-decoration: none; }
 footer a:hover { color: var(--treasure-deep); }
 .powered-badge { color: var(--ink-faint); font-size: 11px; font-style: normal; }
 
